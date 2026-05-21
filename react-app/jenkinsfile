@@ -6,7 +6,7 @@ ipeline {
     stages {
         stage('clone') {
             steps {
-                git branch: 'main', url: 'https://github.com/Aakash0706/test-my-app.git'
+                git branch: 'main', url: 'https://github.com/sunnymca107/react-app.git'
             }
         }
         stage('Build') {
