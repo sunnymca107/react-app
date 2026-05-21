@@ -1,19 +1,33 @@
-pipeline{
-    stages{
-        trigger{
-            cron('H/2 * * * *')
-        }
-        stage("Clone Repository"){
-            steps{
-                git branch:"main"
-                url :"https://github.com/sunnymca107/react-app.git"
+ipeline {
+    agent any
+    triggers{
+        cron '*/20 * * * *'
+    }
+    stages {
+        stage('clone') {
+            steps {
+                git branch: 'main', url: 'https://github.com/Aakash0706/test-my-app.git'
             }
         }
-        Stage("Install Ract"){
-            steps{
-                sh"npm install"
-                sh "npm vite@latest react-app"
+        stage('Build') {
+            steps {
+                sh 'npm install'
+                sh 'npm run build'
+            }
+        }
+        stage('Docker Build & push') {
+            steps {
+                sh 'docker build -t test-my-app .'
+                sh 'docker tag react-app sunnymca107/react-app'
+            }
+        }
+        stage('pull and run') {
+            steps {
+                sh 'docker pull sunnymca107/react-app'
+                 sh 'docker rm -f test-my-app || true'
+                sh 'docker run -d -p  sunnymca107/react-app'
             }
         }
     }
 }
+
