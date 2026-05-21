@@ -1,0 +1,19 @@
+pipeline{
+    stages{
+        trigger{
+            cron('H/2 * * * *')
+        }
+        stage("Clone Repository"){
+            steps{
+                git branch:"main"
+                url :
+            }
+        }
+        Stage("Install Ract"){
+            steps{
+                sh"npm install"
+                sh "npm vite@latest react-app"
+            }
+        }
+    }
+}
