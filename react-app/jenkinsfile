@@ -24,7 +24,7 @@ ipeline {
         stage('pull and run') {
             steps {
                 sh 'docker pull sunnymca107/react-app'
-                 sh 'docker rm -f test-my-app || true'
+                 sh 'docker rm -f react-app || true'
                 sh 'docker run -d -p  sunnymca107/react-app'
             }
         }
