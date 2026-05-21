@@ -1,4 +1,4 @@
-ipeline {
+pipeline {
     agent any
     triggers{
         cron '*/20 * * * *'
@@ -17,7 +17,7 @@ ipeline {
         }
         stage('Docker Build & push') {
             steps {
-                sh 'docker build -t test-my-app .'
+                sh 'docker build -t react-app .'
                 sh 'docker tag react-app sunnymca107/react-app'
             }
         }
